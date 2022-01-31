@@ -1,0 +1,138 @@
+/* ---------using css grid ---------------*/
+
+/* .content-container {
+  margin-top: 20px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.content-list1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+.content-list2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+.content-list3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+.content-list4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+.content-list5 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+
+.description {
+  padding: 20px;
+}
+
+.item-description {
+  display: block;
+  text-align: center;
+}
+.item-des-1 {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+.item-des-2 {
+  font-size: 9px;
+  margin-bottom: 15px;
+}
+.item-des-3 {
+  display: inline;
+  padding: 5px;
+  color: white;
+  background-color: #d00255;
+}
+
+.des-center {
+  justify-self: center;
+} */
+
+/* ------------using flex box ----------*/
+
+.content-container {
+  margin-top: 20px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.content-list1 {
+  display: flex;
+  text-align: center;
+  margin-bottom: 10px;
+  border-top: 1px solid grey;
+}
+.content-list2 {
+  display: flex;
+  text-align: center;
+  margin-bottom: 10px;
+  border-top: 1px solid grey;
+}
+.content-list3 {
+  display: flex;
+  text-align: center;
+  margin-bottom: 10px;
+  border-top: 1px solid grey;
+}
+.content-list4 {
+  display: flex;
+  text-align: center;
+  margin-bottom: 10px;
+  border-top: 1px solid grey;
+}
+.content-list5 {
+  display: flex;
+  text-align: center;
+  margin-bottom: 10px;
+  border-top: 1px solid grey;
+}
+
+.des-left {
+  padding: 10px;
+  flex: 50%;
+}
+
+.des-right {
+  padding: 10px;
+  flex: 50%;
+}
+
+.description {
+  padding: 20px;
+}
+
+.item-description {
+  display: block;
+}
+.item-des-1 {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+.item-des-2 {
+  font-size: 9px;
+  margin-bottom: 15px;
+}
+.item-des-3 {
+  display: inline;
+  padding: 5px;
+  color: white;
+  background-color: #d00255;
+}
