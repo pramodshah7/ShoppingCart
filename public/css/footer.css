@@ -1,0 +1,12 @@
+.footer-fix {
+  padding: 10px 150px;
+  background-color: #f2f2f2;
+  font-size: 12px;
+}
+
+@media (min-width: 100px) and (max-width: 768px) {
+  .footer-fix {
+    padding: 10px 10px;
+    text-align: center;
+  }
+}
