@@ -20,6 +20,7 @@
   "dependencies": {
     "express": "^4.17.2",
     "express-handlebars": "^6.0.2",
+    "handlebars": "^4.7.7",
     "hbs": "^4.2.0",
     "nodemon": "^2.0.15",
     "webpack": "^5.67.0",
@@ -27,7 +28,6 @@
   },
   "devDependencies": {
     "css-loader": "^6.5.1",
-    "node-sass": "^7.0.1",
     "sass": "^1.49.0",
     "sass-loader": "^12.4.0",
     "webpack-dev-server": "^4.7.3"

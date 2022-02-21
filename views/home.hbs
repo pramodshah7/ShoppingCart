@@ -1,127 +1,148 @@
-<link href="./css/home.css" rel="stylesheet">
+<link href="../css/home.css" rel="stylesheet">
+{{!--
+<script src="../js/home.js"></script> --}}
 
 {{> header}}
 
-{{!-- using css grid --}}
 
-{{!-- <div class="row">
-  <div class="content-container">
-    <div class="content-list1">
-      <div class="description des-left">
-        <img src="./images/fruits.png" width="150px" height="100px">
-      </div>
-      <div class="description des-right des-center">
-        <span class="item-description item-des-1">Fruits & Vegetables</span>
-        <span class="item-description item-des-2">A variety of fresh fruits and vegetables.</span>
-        <span class="item-description item-des-3">Explore fruit-and-veg</span>
-      </div>
+<div class="wrapper">
+  <div class="prev-btn">PREV</div>
+
+  <div class="slides-container">
+    {{#each banners}}
+    <div class="slide-image">
+      <img src="{{bannerImageUrl}}" alt="{{bannerImageAlt}}" />
     </div>
-    <div class="content-list2">
-      <div class="description des-left des-center">
-        <span class="item-description item-des-1">Bakery Cakes and Dairy</span>
-        <span class="item-description item-des-2">The best cupcakes,cookies,cakes,pies,cheesecakes,fresh
-          bread,biscotti,muffins,bagels,fresh coffee,milk and more.</span>
-        <span class="item-description item-des-3">Explore bakery-cakes-dairy</span>
-      </div>
-      <div class="description des-right">
-        <img src="./images/bakery.png" width="150px" height="100px">
-      </div>
-    </div>
-    <div class="content-list3">
-      <div class="description des-left">
-        <img src="./images/beverages.png" width="150px" height="100px">
-      </div>
-      <div class="description des-right des-center">
-        <span class="item-description item-des-1">Beverages</span>
-        <span class="item-description item-des-2">Our beverages department will ensure your fridge is always fully
-          stocked.Shop for sada,juice,beer and more.</span>
-        <span class="item-description item-des-3">Explore beverages</span>
-      </div>
-    </div>
-    <div class="content-list4">
-      <div class="description des-left des-center">
-        <span class="item-description item-des-1">Beauty and Hygiene</span>
-        <span class="item-description item-des-2">Buy beauty and personal care products online in india best
-          prices.</span>
-        <span class="item-description item-des-3">Explore beauty-hygiene</span>
-      </div>
-      <div class="description des-right">
-        <img src="./images/beauty.png" width="150px" height="100px">
-      </div>
-    </div>
-    <div class="content-list5">
-      <div class="description des-left">
-        <img src="./images/baby.png" width="150px" height="100px">
-      </div>
-      <div class="description des-right des-center">
-        <span class="item-description item-des-1">Baby Care</span>
-        <span class="item-description item-des-2">Shop online for Baby Products,Diapers,Skin Care Products,etc.</span>
-        <span class="item-description item-des-3">Explore baby</span>
-      </div>
-    </div>
+    {{/each}}
   </div>
-</div> --}}
 
+  <div class="next-btn">NEXT</div>
+</div>
+<div class="navigation-dots"></div>
 
-
-
-{{!-- using flex box --}}
 <div class="row">
   <div class="content-container">
+    {{#each categories}}
+    {{#if_even order}}
+
+
+    <div class="content-list1">
+      <div class="description des-right">
+        <span class="item-description item-des-1">{{name}}</span>
+        <span class="item-description item-des-2">{{description}}</span>
+        <span class="item-description item-des-3"><a href="/product/{{id}}">Explore {{key}}</a></span>
+      </div>
+      <div class="description des-left">
+        <img src="{{imageUrl}}" width="160px" height="110px">
+      </div>
+    </div>
+
+    {{else}}
     <div class="content-list1">
       <div class="description des-left">
-        <img src="./images/fruits.png" width="150px" height="100px">
+        <img src="{{imageUrl}}" width="160px" height="110px">
       </div>
       <div class="description des-right">
-        <span class="item-description item-des-1">Fruits & Vegetables</span>
-        <span class="item-description item-des-2">A variety of fresh fruits and vegetables.</span>
-        <span class="item-description item-des-3">Explore fruit-and-veg</span>
+        <span class="item-description item-des-1">{{name}}</span>
+        <span class="item-description item-des-2">{{description}}</span>
+        <span class="item-description item-des-3"><a href="/product/{{id}}">Explore {{key}}</a></span>
       </div>
     </div>
-    <div class="content-list2">
-      <div class="description des-left">
-        <span class="item-description item-des-1">Bakery Cakes and Dairy</span>
-        <span class="item-description item-des-2">The best cupcakes,cookies,cakes,pies,cheesecakes,fresh
-          bread,biscotti,muffins,bagels,fresh coffee,milk and more.</span>
-        <span class="item-description item-des-3">Explore bakery-cakes-dairy</span>
-      </div>
-      <div class="description des-right">
-        <img src="./images/bakery.png" width="150px" height="100px">
-      </div>
-    </div>
-    <div class="content-list3">
-      <div class="description des-left">
-        <img src="./images/beverages.png" width="150px" height="100px">
-      </div>
-      <div class="description des-right">
-        <span class="item-description item-des-1">Beverages</span>
-        <span class="item-description item-des-2">Our beverages department will ensure your fridge is always fully
-          stocked.Shop for sada,juice,beer and more.</span>
-        <span class="item-description item-des-3">Explore beverages</span>
-      </div>
-    </div>
-    <div class="content-list4">
-      <div class="description des-left">
-        <span class="item-description item-des-1">Beauty and Hygiene</span>
-        <span class="item-description item-des-2">Buy beauty and personal care products online in india best
-          prices.</span>
-        <span class="item-description item-des-3">Explore beauty-hygiene</span>
-      </div>
-      <div class="description des-right">
-        <img src="./images/beauty.png" width="150px" height="100px">
-      </div>
-    </div>
-    <div class="content-list5">
-      <div class="description des-left">
-        <img src="./images/baby.png" width="150px" height="100px">
-      </div>
-      <div class="description des-right">
-        <span class="item-description item-des-1">Baby Care</span>
-        <span class="item-description item-des-2">Shop online for Baby Products,Diapers,Skin Care Products,etc.</span>
-        <span class="item-description item-des-3">Explore baby</span>
-      </div>
-    </div>
+    {{/if_even}}
+    {{/each}}
   </div>
 </div>
 
-{{> footer}}
+<script>
+  const slideImage = document.querySelectorAll(".slide-image");
+  const slidesContainer = document.querySelector(".slides-container");
+  const nextBtn = document.querySelector(".next-btn");
+  const prevBtn = document.querySelector(".prev-btn");
+  const navigationDots = document.querySelector(".navigation-dots");
+
+  let numberOfImages = slideImage.length;
+  let slideWidth = slideImage[0].clientWidth;
+  let currentSlide = 0;
+
+  // Set up the slider
+
+  function init() {
+    slideImage.forEach((img, i) => {
+      img.style.left = i * 100 + "%";
+    });
+
+    slideImage[0].classList.add("active");
+
+    createNavigationDots();
+  }
+
+  init();
+
+  // Create navigation dots
+
+  function createNavigationDots() {
+    for (let i = 0; i < numberOfImages; i++) {
+      const dot = document.createElement("div");
+      dot.classList.add("single-dot");
+      navigationDots.appendChild(dot);
+
+      dot.addEventListener("click", () => {
+        goToSlide(i);
+      });
+    }
+
+    navigationDots.children[0].classList.add("active");
+  }
+
+  // Next Button
+
+  nextBtn.addEventListener("click", () => {
+    if (currentSlide >= numberOfImages - 1) {
+      goToSlide(0);
+      return;
+    }
+
+    currentSlide++;
+    goToSlide(currentSlide);
+  });
+
+  // Previous Button
+
+  prevBtn.addEventListener("click", () => {
+    if (currentSlide <= 0) {
+      goToSlide(numberOfImages - 1);
+      return;
+    }
+
+    currentSlide--;
+    goToSlide(currentSlide);
+  });
+
+  // Go To Slide
+
+  function goToSlide(slideNumber) {
+    slidesContainer.style.transform =
+      "translateX(-" + slideWidth * slideNumber + "px)";
+
+    currentSlide = slideNumber;
+
+    setActiveClass();
+  }
+
+  // Set Active Class
+
+  function setActiveClass() {
+    // Set active class for Slide Image
+
+    let currentActive = document.querySelector(".slide-image.active");
+    currentActive.classList.remove("active");
+    slideImage[currentSlide].classList.add("active");
+
+    //   set active class for navigation dots
+
+    let currentDot = document.querySelector(".single-dot.active");
+    currentDot.classList.remove("active");
+    navigationDots.children[currentSlide].classList.add("active");
+  }
+
+</script>

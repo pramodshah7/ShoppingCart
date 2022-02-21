@@ -1,10 +1,11 @@
 <link href="../css/header.css" rel="stylesheet">
+<script type="text/javascript " src="../js/header.js"></script>
 
-<div class="row">
+<div class="row header-box">
   <div class="header-container">
     <nav class="main-header">
       <div class="grid-item1 itm1">
-        <a href="/"><img src="./images/logo.png" width="115px" height="50px"></a>
+        <a href="/"><img src="../images/logo.png" width="115px" height="50px"></a>
       </div>
       <div class="grid-item1 itm2">
         <a class="link link1" href="/">Home</a>
@@ -15,9 +16,38 @@
           <span><a class="s-r1" href="/signin">Sign in</a></span>
           <span><a class="s-r2" href="/register">Register</a></span>
         </div>
-        <span class="cart-btn"><img class="cart-icon" src="./images/cart.svg" width="17px" height="13px"> 0
-          items</span>
+        <a href="/cart" class="cart-btn"><span><img class="cart-icon" src="../images/cart.svg" width="17px"
+              height="13px"><span></span>
+            item</span></a>
       </div>
     </nav>
   </div>
 </div>
+
+<div id="myCart">
+  <div class="cart-details">
+    <span class="cart-sub-details cart-sub1">My Cart (1 item)</span>
+    <span class="cart-sub-details cart-sub2" onclick="closeCart()">x</span>
+  </div>
+</div>
+<script>
+  window.onload = function () {
+    const cartValue = document.querySelector(".cart-btn span span");
+    let no = 0;
+
+    let products = JSON.parse(localStorage.getItem("products"));
+    if (localStorage.getItem("products")) {
+      no = products.length;
+    }
+    cartValue.innerHTML = no;
+  };
+
+  function openCart() {
+    document.getElementById("myCart").style.display = "block";
+  }
+
+  function closeCart() {
+    document.getElementById("myCart").style.display = "none";
+  }
+
+</script>

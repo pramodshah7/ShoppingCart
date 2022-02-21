@@ -1,10 +1,10 @@
 const express = require("express");
 const path = require("path");
 const { engine } = require("express-handlebars");
+const Handlebars = require("handlebars");
 app = express();
 
 // view engine setup
-
 app.set("views", path.join(__dirname, "views"));
 app.engine(
   "hbs",
@@ -14,22 +14,36 @@ app.engine(
   })
 );
 app.set("view engine", "hbs");
-app.use(express.static("public"));
 
+// app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
+
+const products = require("./data/product.json");
+const categories = require("./data/category.json");
+const banners = require("./data/banner.json");
+
+//home route
 app.get("/", function (req, res) {
-  res.render("home.hbs", { locals: { title: "Welcome" } });
+  res.render("home.hbs", {
+    locals: { title: "Welcome" },
+    categories: categories,
+    banners: banners,
+  });
 });
 
-app.get("/signin", function (req, res) {
-  res.render("signin.hbs", { locals: { title: "Sign In" } });
-});
+//routes
+app.use("/", require("./routes/authenticate/signin"));
+app.use("/", require("./routes/authenticate/signup"));
+app.use("/", require("./routes/home/home"));
+app.use("/", require("./routes/product/product"));
+app.use("/", require("./routes/cart/cart"));
 
-app.get("/register", function (req, res) {
-  res.render("register.hbs", { locals: { title: "Register" } });
-});
-
-app.get("/product", function (req, res) {
-  res.render("product.hbs", { locals: { title: "Product" } });
+Handlebars.registerHelper("if_even", function (conditional, options) {
+  if (conditional % 2 == 0) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
 });
 
 const PORT = 3000;
