@@ -4,9 +4,10 @@
 <div class="cart-container">
 
   <div class="mycart">
-    <span class="my-cart-title"><strong>My Cart (<span></span> item)</span></strong>
+    <span class="my-cart-title"><strong>My Cart ( {{#if storeProducts.length}}{{storeProducts.length}}{{else}}0{{/if}}
+        item)</strong></span>
   </div>
-
+  {{#each storeProducts}}
   <div class="my-cart-details">
     <div class="cart-item-details item1">
 
@@ -15,14 +16,15 @@
       </div>
 
       <div class="sub-cart-item-details">
-        <div class="sub-cart-item-details1">Apple - Washington, Regular, 4 pcs{{name}}</div>
+        <div class="sub-cart-item-details1">{{name}}</div>
         <div class="sub-cart-item-details1">
-          <div class="sub2-cart-item-details1 item1-des">-</div>
-          <div class="sub2-cart-item-details1 item2-des">1</div>
+          <div class="sub2-cart-item-details1 item1-des"><a href="/product-remove/{{id}}">-</a></div>
+          <div class="sub2-cart-item-details1 item2-des">{{count}}</div>
           <div class="sub2-cart-item-details1 item3-des">
-            +</div>
+            <a href="/product-add/{{id}}">+</a>
+          </div>
           <div class="sub2-cart-item-details1 item4-des">x</div>
-          <div class="sub2-cart-item-details1 item5-des">Rs. 187</div>
+          <div class="sub2-cart-item-details1 item5-des">Rs. {{price}}</div>
         </div>
       </div>
 
@@ -31,6 +33,8 @@
       <div>Rs. 187</div>
     </div>
   </div>
+  {{/each}}
+
 
   <div class="cart-other-description1">
     <div class="cart-lowest-price">
@@ -57,78 +61,3 @@
     </div>
   </div>
 </div>
-<div id="my-id">
-
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
-  integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-
-
-  function addProduct(
-    id,
-    name,
-    price,
-    description,
-    stock,
-    category,
-    sku,
-    imageURL
-  ) {
-
-
-    if (typeof (Storage) !== 'undefined') {
-      let products = [];
-      let product = {
-        id: id,
-        name: name,
-        price: price,
-        description: description,
-        stock: stock,
-        category: category,
-        sku: sku,
-        imageURL: imageURL,
-        count: 1,
-      };
-      if (JSON.parse(localStorage.getItem('products')) === null) {
-        products.push(product);
-        localStorage.setItem("products", JSON.stringify(products));
-        window.location.reload();
-      } else {
-        const localProducts = JSON.parse(localStorage.getItem("products"));
-        localProducts.map(data => {
-          if (product.id == data.id) {
-            product.count = data.count + 1;
-          } else {
-            products.push(data);
-          }
-        });
-        products.push(product);
-        localStorage.setItem('products', JSON.stringify(products));
-        window.location.reload();
-      }
-    } else {
-      alert('local storage is not working on your browser');
-    }
-
-  }
-  function removeProduct(productId) {
-    let storageProducts = JSON.parse(localStorage.getItem("products"));
-    let products = storageProducts.filter(
-      (product) => product.productId !== productId
-    );
-    localStorage.setItem("products", JSON.stringify(products));
-  }
-
-  window.onload = function () {
-    const myCartValue = document.querySelector(".my-cart-title span")
-    let products = JSON.parse(localStorage.getItem("products"))
-    let no = 0
-    if (localStorage.getItem("products")) {
-      no = products.length;
-    }
-    myCartValue.innerHTML = no;
-
-  }
-</script>

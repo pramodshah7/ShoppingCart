@@ -33,19 +33,17 @@
             <div class="sub-responsive-product">
               <span class="product-description">{{description}}</span>
               <div class="product-details-reponsive">
-                <div class="product-details1 product-buy-now product-price"
-                  onclick="addProduct('{{productId}}','{{name}}','{{price}}','{{description}}','{{stock}}','{{category}}','{{sku}}','{{imageURL}}')">
+                <div class="product-details1 product-buy-now product-price">
                   <span>MRP Rs.</span><span>{{price}}</span>
-                  Buy Now
+                  <a href="/product-buy-now/{{id}}">Buy Now</a>
                 </div>
               </div>
             </div>
           </div>
           <div class="product-details">
             <div class="product-details1 product-price"><span>MRP Rs.</span><span>{{price}}</span></div>
-            <div class="product-details1 product-buy-now"
-              onclick="addProduct('{{id}}','{{name}}','{{price}}','{{description}}','{{stock}}','{{category}}','{{sku}}','{{imageURL}}')">
-              Buy Now
+            <div class="product-details1 product-buy-now">
+              <a href="/product-buy-now/{{id}}">Buy Now</a>
             </div>
           </div>
         </div>
@@ -56,61 +54,3 @@
 </div>
 
 {{> footer}}
-
-<script>
-  function addProduct(
-    id,
-    name,
-    price,
-    description,
-    stock,
-    category,
-    sku,
-    imageURL
-  ) {
-
-
-    if (typeof (Storage) !== 'undefined') {
-      let products = [];
-      let product = {
-        id: id,
-        name: name,
-        price: price,
-        description: description,
-        stock: stock,
-        category: category,
-        sku: sku,
-        imageURL: imageURL,
-        count: 1,
-      };
-      if (JSON.parse(localStorage.getItem('products')) === null) {
-        products.push(product);
-        localStorage.setItem("products", JSON.stringify(products));
-        window.location.reload();
-      } else {
-        const localProducts = JSON.parse(localStorage.getItem("products"));
-        localProducts.map(data => {
-          if (product.id == data.id) {
-            product.count = data.count + 1;
-          } else {
-            products.push(data);
-          }
-        });
-        products.push(product);
-        localStorage.setItem('products', JSON.stringify(products));
-        window.location.reload();
-      }
-    } else {
-      alert('local storage is not working on your browser');
-    }
-
-  }
-  function removeProduct(productId) {
-    let storageProducts = JSON.parse(localStorage.getItem("products"));
-    let products = storageProducts.filter(
-      (product) => product.productId !== productId
-    );
-    localStorage.setItem("products", JSON.stringify(products));
-  }
-
-</script>

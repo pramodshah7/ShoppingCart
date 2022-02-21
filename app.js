@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const { engine } = require("express-handlebars");
 const Handlebars = require("handlebars");
+const store = require("store2");
 app = express();
 
 // view engine setup
@@ -24,17 +25,18 @@ const banners = require("./data/banner.json");
 
 //home route
 app.get("/", function (req, res) {
+  let storeProducts = store.get("storeProducts");
   res.render("home.hbs", {
     locals: { title: "Welcome" },
     categories: categories,
     banners: banners,
+    storeProducts: storeProducts,
   });
 });
 
 //routes
 app.use("/", require("./routes/authenticate/signin"));
 app.use("/", require("./routes/authenticate/signup"));
-app.use("/", require("./routes/home/home"));
 app.use("/", require("./routes/product/product"));
 app.use("/", require("./routes/cart/cart"));
 
