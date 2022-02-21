@@ -1,3 +1,116 @@
+<link href="../css/product.css" rel="stylesheet">
+{{!--
+<script src="../js/product.js"> </script> --}}
 {{> header}}
+<div class="row">
+  <div class="product-container">
+    <div class="category-dropdown">
+      <select class="category-dropdown-title" onchange="location = this.value;">
+        {{#each categories}}
+        <option class="category-dropdown-option" value="/product/{{id}}"><span
+            class="category-option-name">{{name}}</span>
+        </option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="product-main-section">
+      <div class="product-link-section">
+        {{#each categories}}
+        <a href="/product/{{id}}"><span class="product-link">{{name}}</span></a>
+        {{/each}}
+      </div>
+      <div class="product-list-section">
+        {{#each products}}
+
+        <div class="product-item">
+          <span class="product-title">
+            {{name}}
+          </span>
+          <div class="responsive-product">
+            <div class="sub-responsive-product">
+              <img src="{{imageURL}}" width="150px" height="150px">
+            </div>
+            <div class="sub-responsive-product">
+              <span class="product-description">{{description}}</span>
+              <div class="product-details-reponsive">
+                <div class="product-details1 product-buy-now product-price"
+                  onclick="addProduct('{{productId}}','{{name}}','{{price}}','{{description}}','{{stock}}','{{category}}','{{sku}}','{{imageURL}}')">
+                  <span>MRP Rs.</span><span>{{price}}</span>
+                  Buy Now
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-details">
+            <div class="product-details1 product-price"><span>MRP Rs.</span><span>{{price}}</span></div>
+            <div class="product-details1 product-buy-now"
+              onclick="addProduct('{{id}}','{{name}}','{{price}}','{{description}}','{{stock}}','{{category}}','{{sku}}','{{imageURL}}')">
+              Buy Now
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
 
 {{> footer}}
+
+<script>
+  function addProduct(
+    id,
+    name,
+    price,
+    description,
+    stock,
+    category,
+    sku,
+    imageURL
+  ) {
+
+
+    if (typeof (Storage) !== 'undefined') {
+      let products = [];
+      let product = {
+        id: id,
+        name: name,
+        price: price,
+        description: description,
+        stock: stock,
+        category: category,
+        sku: sku,
+        imageURL: imageURL,
+        count: 1,
+      };
+      if (JSON.parse(localStorage.getItem('products')) === null) {
+        products.push(product);
+        localStorage.setItem("products", JSON.stringify(products));
+        window.location.reload();
+      } else {
+        const localProducts = JSON.parse(localStorage.getItem("products"));
+        localProducts.map(data => {
+          if (product.id == data.id) {
+            product.count = data.count + 1;
+          } else {
+            products.push(data);
+          }
+        });
+        products.push(product);
+        localStorage.setItem('products', JSON.stringify(products));
+        window.location.reload();
+      }
+    } else {
+      alert('local storage is not working on your browser');
+    }
+
+  }
+  function removeProduct(productId) {
+    let storageProducts = JSON.parse(localStorage.getItem("products"));
+    let products = storageProducts.filter(
+      (product) => product.productId !== productId
+    );
+    localStorage.setItem("products", JSON.stringify(products));
+  }
+
+</script>
