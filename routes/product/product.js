@@ -4,12 +4,17 @@ const router = express.Router();
 const products = require("../../data/product.json");
 const categories = require("../../data/category.json");
 const banners = require("../../data/banner.json");
+const store = require("store2");
+
+let storeProducts = [];
+store.set("storeProducts", storeProducts);
 
 router.get("/product", function (req, res) {
   res.render("product.hbs", {
     locals: { title: "Product" },
     products: products,
     categories: categories,
+    storeProducts: storeProducts,
   });
 });
 
@@ -22,7 +27,71 @@ router.get("/product/:category", function (req, res) {
     locals: { title: "Product" },
     products: productCategory,
     categories: categories,
+    storeProducts: storeProducts,
   });
+});
+router.get("/product-buy-now/:id", function (req, res) {
+  let id = req.params.id;
+  let product = products.filter((item) => item.id == id);
+  product[0].count = 1;
+  storeProducts = store.get("storeProducts");
+  if (storeProducts.length > 0) {
+    let prod1 = storeProducts.filter((item) => item.id == id);
+    if (prod1.length > 0) {
+      storeProducts = storeProducts.filter((item) => item.id != id);
+      prod1[0].count = prod1[0].count + 1;
+      storeProducts.push(prod1[0]);
+      store.set("storeProducts", storeProducts);
+    } else {
+      storeProducts.push(product[0]);
+      store.set("storeProducts", storeProducts);
+    }
+  } else {
+    storeProducts.push(product[0]);
+    store.set("storeProducts", storeProducts);
+  }
+  // console.log(store.get("storeProducts"));
+  res.redirect("/product");
+});
+router.get("/product-add/:id", function (req, res) {
+  let id = req.params.id;
+  let product = products.filter((item) => item.id == id);
+  product[0].count = 1;
+  storeProducts = store.get("storeProducts");
+  if (storeProducts.length > 0) {
+    let prod1 = storeProducts.filter((item) => item.id == id);
+    if (prod1.length > 0) {
+      storeProducts = storeProducts.filter((item) => item.id != id);
+      prod1[0].count = prod1[0].count + 1;
+      storeProducts.push(prod1[0]);
+      store.set("storeProducts", storeProducts);
+    } else {
+      storeProducts.push(product[0]);
+      store.set("storeProducts", storeProducts);
+    }
+  } else {
+    storeProducts.push(product[0]);
+    store.set("storeProducts", storeProducts);
+  }
+  // console.log(store.get("storeProducts"));
+  res.redirect("/cart");
+});
+router.get("/product-remove/:id", function (req, res) {
+  // let id = req.params.id;
+  // storeProducts = store.get("storeProducts");
+  // if (storeProducts.length > 0) {
+  //   let prod1 = storeProducts.filter((item) => item.id == id);
+  //   let prod2 = storeProducts.filter((item) => item.id != id);
+  //   if (prod1[0].count > 1) {
+  //     prod1[0].count = prod1[0].count - 1;
+  //     prod2.push(prod1);
+  //     store.set("storeProducts", prod2);
+  //   } else {
+  //     storeProducts = storeProducts.filter((item) => item.id != id);
+  //     store.set("storeProducts", storeProducts);
+  //   }
+  // }
+  res.redirect("/cart");
 });
 
 module.exports = router;

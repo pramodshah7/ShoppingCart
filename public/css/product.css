@@ -49,6 +49,10 @@
     color: white;
     padding: 5px 15px 5px 15px;
   }
+  .product-buy-now a {
+    color: white;
+    text-decoration: none;
+  }
   .product-list-section {
     padding: 10px;
     display: grid;
@@ -116,6 +120,10 @@
     color: white;
     padding: 5px 15px 5px 15px;
   }
+  .product-buy-now a {
+    color: white;
+    text-decoration: none;
+  }
 }
 
 /* laptop and larger deveices*/
@@ -147,6 +155,10 @@
     background-color: #d00255;
     color: white;
     padding: 5px 15px 5px 15px;
+  }
+  .product-buy-now a {
+    color: white;
+    text-decoration: none;
   }
 }
 .product-link {

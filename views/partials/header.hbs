@@ -17,8 +17,8 @@
           <span><a class="s-r2" href="/register">Register</a></span>
         </div>
         <a href="/cart" class="cart-btn"><span><img class="cart-icon" src="../images/cart.svg" width="17px"
-              height="13px"><span></span>
-            item</span></a>
+              height="13px">
+            {{#if storeProducts.length}}{{storeProducts.length}}{{else}}0{{/if}} item</span></a>
       </div>
     </nav>
   </div>
@@ -31,16 +31,6 @@
   </div>
 </div>
 <script>
-  window.onload = function () {
-    const cartValue = document.querySelector(".cart-btn span span");
-    let no = 0;
-
-    let products = JSON.parse(localStorage.getItem("products"));
-    if (localStorage.getItem("products")) {
-      no = products.length;
-    }
-    cartValue.innerHTML = no;
-  };
 
   function openCart() {
     document.getElementById("myCart").style.display = "block";
