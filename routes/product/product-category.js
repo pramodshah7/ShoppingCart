@@ -49,7 +49,7 @@ router.get("/product-category-buy-now/:id", function (req, res) {
   }
   store.set("totalPrice", totalPrice);
   // console.log(store.get("storeProducts"));
-  res.redirect(`/product/${product[0].category}`);
+  res.redirect("/cart");
 });
 router.get("/product-add/:id", function (req, res) {
   let id = req.params.id;
