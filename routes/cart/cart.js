@@ -8,9 +8,11 @@ const store = require("store2");
 
 router.get("/cart", function (req, res) {
   let storeProducts = store.get("storeProducts");
+  let totalPrice = store.get("totalPrice");
   res.render("cart.hbs", {
     locals: { title: "Cart" },
     storeProducts: storeProducts,
+    totalPrice: totalPrice,
   });
 });
 
