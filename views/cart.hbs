@@ -12,7 +12,7 @@
     <div class="cart-item-details item1">
 
       <div class="sub-cart-item-details">
-        <img src="../images/products/fruit-n-veg/apple.jpg" width="40px" height="40px">
+        <img src="{{imageURL}}" width="40px" height="40px">
       </div>
 
       <div class="sub-cart-item-details">
@@ -30,7 +30,7 @@
 
     </div>
     <div class="cart-item-details item2">
-      <div>Rs. 187</div>
+      <div>Rs. {{multiply count price}}</div>
     </div>
   </div>
   {{/each}}
@@ -57,7 +57,7 @@
       Proceed to checkout
     </div>
     <div class="checkout-details checkout-button">
-      <span>Rs. 187</span> <span>></span>
+      <span>Rs. {{totalPrice}}</span> <span>></span>
     </div>
   </div>
 </div>

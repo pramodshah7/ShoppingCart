@@ -4,9 +4,11 @@ const store = require("store2");
 
 router.get("/signin", function (req, res) {
   let storeProducts = store.get("storeProducts");
+  let totalPrice = store.get("totalPrice");
   res.render("signin.hbs", {
     locals: { title: "Sign In" },
     storeProducts: storeProducts,
+    totalPrice: totalPrice,
   });
 });
 

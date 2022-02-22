@@ -26,11 +26,13 @@ const banners = require("./data/banner.json");
 //home route
 app.get("/", function (req, res) {
   let storeProducts = store.get("storeProducts");
+  let totalPrice = store.get("totalPrice");
   res.render("home.hbs", {
     locals: { title: "Welcome" },
     categories: categories,
     banners: banners,
     storeProducts: storeProducts,
+    totalPrice: totalPrice,
   });
 });
 
@@ -38,6 +40,7 @@ app.get("/", function (req, res) {
 app.use("/", require("./routes/authenticate/signin"));
 app.use("/", require("./routes/authenticate/signup"));
 app.use("/", require("./routes/product/product"));
+app.use("/", require("./routes/product/product-category"));
 app.use("/", require("./routes/cart/cart"));
 
 Handlebars.registerHelper("if_even", function (conditional, options) {
@@ -46,6 +49,9 @@ Handlebars.registerHelper("if_even", function (conditional, options) {
   } else {
     return options.inverse(this);
   }
+});
+Handlebars.registerHelper("multiply", function (one, two) {
+  return one * two;
 });
 
 const PORT = 3000;

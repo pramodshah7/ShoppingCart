@@ -10,17 +10,20 @@ let storeProducts = [];
 let totalPrice = 0;
 store.set("storeProducts", storeProducts);
 
-router.get("/product", function (req, res) {
-  res.render("product.hbs", {
+router.get("/product/:category", function (req, res) {
+  let category = req.params.category;
+  let productCategory = products.filter(function (item) {
+    return item.category == category;
+  });
+  res.render("product-category.hbs", {
     locals: { title: "Product" },
-    products: products,
+    productCategory: productCategory,
     categories: categories,
     storeProducts: storeProducts,
     totalPrice: totalPrice,
   });
 });
-
-router.get("/product-buy-now/:id", function (req, res) {
+router.get("/product-category-buy-now/:id", function (req, res) {
   let id = req.params.id;
   totalPrice = 0;
   let product = products.filter((item) => item.id == id);
@@ -46,7 +49,7 @@ router.get("/product-buy-now/:id", function (req, res) {
   }
   store.set("totalPrice", totalPrice);
   // console.log(store.get("storeProducts"));
-  res.redirect("/product");
+  res.redirect(`/product/${product[0].category}`);
 });
 router.get("/product-add/:id", function (req, res) {
   let id = req.params.id;
